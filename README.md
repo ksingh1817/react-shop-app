@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173 — demo credentials are pre-filled on the login page.
+Open https://react-shop-application.netlify.app/ — demo credentials are pre-filled on the login page.
 
 **Demo user:** `emilys` / `emilyspass`
 
