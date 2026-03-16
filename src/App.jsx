@@ -26,16 +26,17 @@ function AppShell() {
       <Navbar />
       <main className="main">
         <Routes>
-          <Route path="/"               element={<HomePage />} />
-          <Route path="/login"          element={<LoginPage />} />
-          <Route path="/register"       element={<RegisterPage />} />
-          <Route path="/products"       element={<ProductsPage />} />
-          <Route path="/products/:id"   element={<ProductDetailPage />} />
-          <Route path="/cart"           element={<CartPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login"  element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/profile"        element={
             <ProtectedRoute><ProfilePage /></ProtectedRoute>
-          } />
-          <Route path="*"               element={<Navigate to="/" replace />} />
+          } /> 
+ 
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
     </div>

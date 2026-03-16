@@ -89,7 +89,7 @@ export function ProfilePage() {
         <div className="profile-token-card">
           <h3 className="profile-section__title">JWT Token</h3>
           <p className="token-label">Access Token</p>
-          <pre className="token-box">{useAuthStore.getState().token}</pre>
+          <pre className="token-box">{useAuthStore.getState().accessToken}</pre>
           <p className="token-label" style={{marginTop: '12px'}}>Refresh Token</p>
           <pre className="token-box">{useAuthStore.getState().refreshToken}</pre>
         </div>

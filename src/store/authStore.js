@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 import { authApi } from '@/api'
 
-const TOKEN_KEY = 'token'
+const TOKEN_KEY = 'accessToken'
 const REFRESH_KEY = 'refreshToken'
 
 export const useAuthStore = create((set, get) => ({
   user: null,
-  token: localStorage.getItem(TOKEN_KEY) || null,
+  accessToken: localStorage.getItem(TOKEN_KEY) || null,
   refreshToken: localStorage.getItem(REFRESH_KEY) || null,
   loading: false,
   error: null,
@@ -15,11 +15,13 @@ export const useAuthStore = create((set, get) => ({
   login: async (username, password) => {
     set({ loading: true, error: null })
     try {
-      const data = await authApi.login(username, password)
-      const { token, refreshToken, ...user } = data
-      localStorage.setItem(TOKEN_KEY, token)
+      const data = await authApi.login(username, password);
+     // console.log("data",data);
+      const { accessToken, refreshToken, ...user } = data
+     // localStorage.setItem(TOKEN_KEY,  token)
+      localStorage.setItem(TOKEN_KEY,  accessToken)
       localStorage.setItem(REFRESH_KEY, refreshToken)
-      set({ user, token, refreshToken, loading: false })
+      set({ user, accessToken, refreshToken, loading: false })
       return { ok: true }
     } catch (err) {
       const msg = err.response?.data?.message || 'Login failed'
@@ -32,12 +34,12 @@ export const useAuthStore = create((set, get) => ({
   logout: () => {
     localStorage.removeItem(TOKEN_KEY)
     localStorage.removeItem(REFRESH_KEY)
-    set({ user: null, token: null, refreshToken: null, error: null })
+    set({ user: null, accessToken: null, refreshToken: null, error: null })
   },
 
   /* ── fetchMe (hydrate on app load) ── */
   fetchMe: async () => {
-    if (!get().token) return
+    if (!get().accessToken) return
     set({ loading: true })
     try {
       const user = await authApi.getMe()
@@ -54,9 +56,9 @@ export const useAuthStore = create((set, get) => ({
     if (!rt) return false
     try {
       const data = await authApi.refresh(rt)
-      localStorage.setItem(TOKEN_KEY, data.token)
+      localStorage.setItem(TOKEN_KEY, data.accessToken)
       localStorage.setItem(REFRESH_KEY, data.refreshToken)
-      set({ token: data.token, refreshToken: data.refreshToken })
+      set({ accessToken: data.accessToken, refreshToken: data.refreshToken })
       return true
     } catch {
       get().logout()
