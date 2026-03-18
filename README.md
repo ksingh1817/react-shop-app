@@ -1,4 +1,4 @@
-# ShopDummy — React + Vite + Zustand + DummyJSON
+# ShopApp — React + Vite + Zustand + DummyJSON
 
 A production-grade frontend demo integrating user auth, JWT handling, product catalog, and cart management.
 
